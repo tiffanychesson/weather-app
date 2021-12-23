@@ -1,4 +1,4 @@
-// Display current date and time
+// Display current date and time - (on page load)
 let currentDate = document.querySelector("#current-date");
 
 let now = new Date();
@@ -50,38 +50,12 @@ function formatDate(now) {
 
 currentDate.innerHTML = formatDate(now);
 
-// Get current location
+// API link foundations
 let root = "https://api.openweathermap.org/data/2.5/weather?";
 let apiKey = "b1ed8cbb71d26e708aef7f929929627c";
 let units = "metric";
 
-let currentLocation = document.querySelector("#current-location");
-currentLocation.addEventListener("click", () => {
-  navigator.geolocation.getCurrentPosition((position) => {
-    let lat = position.coords.latitude;
-    let long = position.coords.longitude;
-    axios
-      .get(`${root}lat=${lat}&lon=${long}&units=${units}&appid=${apiKey}`)
-      .then((response) => {
-        document.querySelector("#current-temp").innerHTML = Math.round(
-          response.data.main.temp
-        );
-        document.querySelector("#current-feels-like").innerHTML = Math.round(
-          response.data.main.feels_like
-        );
-        document.querySelector("#current-clouds-api").innerHTML =
-          response.data.clouds.all;
-        document.querySelector("#current-wind-api").innerHTML = Math.round(
-          response.data.wind.speed
-        );
-        document.querySelector("h1").innerHTML = response.data.name;
-      });
-  });
-});
-
-selectDefault();
-
-// Default to London
+// Default to London - (on page load)
 function selectDefault() {
   document.querySelector("h1").innerHTML = `London`;
   axios
@@ -101,7 +75,9 @@ function selectDefault() {
     });
 }
 
-// Search City and pull data via API
+selectDefault();
+
+// Search City via API - (as a result of clicking 🔍 button)
 let citySearch = document.querySelector("#search-bar");
 let citySearchInput = document.querySelector("#search-bar-input");
 
@@ -111,6 +87,7 @@ function selectCity(event) {
   pullTemp();
 }
 
+// Pull current weather condition data via API - (following successful city lookup)
 function pullTemp() {
   let city = citySearchInput.value;
   axios
@@ -131,3 +108,30 @@ function pullTemp() {
 }
 
 citySearch.addEventListener("submit", selectCity);
+
+// Get current location - (as a result of clicking 📍 button)
+let currentLocation = document.querySelector("#current-location");
+currentLocation.addEventListener("click", () => {
+  navigator.geolocation.getCurrentPosition((position) => {
+    let lat = position.coords.latitude;
+    let long = position.coords.longitude;
+    axios
+      .get(`${root}lat=${lat}&lon=${long}&units=${units}&appid=${apiKey}`)
+      // update current weather conditions in line with current location
+      .then((response) => {
+        document.querySelector("#current-temp").innerHTML = Math.round(
+          response.data.main.temp
+        );
+        document.querySelector("#current-feels-like").innerHTML = Math.round(
+          response.data.main.feels_like
+        );
+        document.querySelector("#current-clouds-api").innerHTML =
+          response.data.clouds.all;
+        document.querySelector("#current-wind-api").innerHTML = Math.round(
+          response.data.wind.speed
+        );
+        document.querySelector("h1").innerHTML = response.data.name;
+        citySearchInput.value = response.data.name;
+      });
+  });
+});

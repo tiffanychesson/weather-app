@@ -21,7 +21,7 @@ P {
 .weather-colour {
   background: white;
   border-radius: 0px 0px 170px 170px;
-  box-shadow: 0px 0px 185px 100px #fdbc10;
+  box-shadow: 0px 0px 185px 100px #ffd561;
 }
 .search-bar {
   display: block;
@@ -33,30 +33,43 @@ P {
   width: 80%;
   margin: 1% 0% 0% 3%;
 }
-.current-clouds {
-  text-align: right;
-}
 .current-weather {
   display: inline-block;
   margin: 0 auto;
   text-align: center;
 }
-.current-wind {
-  text-align: left;
+.current-temperature {
+  margin-top: 30px;
+  color: #535353;
+}
+.current-clouds {
+  text-align: right;
 }
 .weather-icon {
-  color: grey;
+  color: rgb(133, 131, 131);
   font-size: 1.95rem;
   display: inline-block;
 }
-.current-temperature {
+.clearfix {
   text-align: center;
-  font-size: 1.15rem;
+}
+.current-temp {
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 5px;
+  display: inline-block;
+  line-height: 1;
+}
+.current-temp-unit {
+  position: relative;
+  top: -24px;
 }
 .current-feels-like {
   text-align: center;
   font-size: 0.95rem;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
+  margin-top: 0px;
+  color: rgb(117, 116, 116);
 }
 .weather-emoji {
   font-size: 1.75rem;
@@ -68,7 +81,6 @@ P {
   margin-bottom: 0px;
 }
 .icons {
-  top: 65px;
   position: relative;
   font-size: 0.8rem;
 }

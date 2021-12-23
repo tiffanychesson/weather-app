@@ -72,6 +72,15 @@ function selectDefault() {
       document.querySelector("#current-wind-api").innerHTML = Math.round(
         response.data.wind.speed
       );
+      document
+        .querySelector("#current-weather")
+        .setAttribute(
+          "src",
+          `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+        );
+      document
+        .querySelector("#current-weather")
+        .setAttribute("alt", response.data.weather[0].description);
     });
 }
 
@@ -104,6 +113,15 @@ function pullTemp() {
       document.querySelector("#current-wind-api").innerHTML = Math.round(
         response.data.wind.speed
       );
+      document
+        .querySelector("#current-weather")
+        .setAttribute(
+          "src",
+          `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+        );
+      document
+        .querySelector("#current-weather")
+        .setAttribute("alt", response.data.weather[0].description);
     });
 }
 
@@ -132,6 +150,15 @@ currentLocation.addEventListener("click", () => {
         );
         document.querySelector("h1").innerHTML = response.data.name;
         citySearchInput.value = response.data.name;
+        document
+          .querySelector("#current-weather")
+          .setAttribute(
+            "src",
+            `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+          );
+        document
+          .querySelector("#current-weather")
+          .setAttribute("alt", response.data.weather[0].description);
       });
   });
 });

@@ -58,33 +58,33 @@ let units = "metric";
 // Default to London - (on page load)
 function selectDefault() {
   document.querySelector("h1").innerHTML = `London`;
-  axios
-    .get(`${root}q=london&units=${units}&appid=${apiKey}`)
-    .then((response) => {
-      document.querySelector("#current-temp").innerHTML = Math.round(
-        response.data.main.temp
-      );
-      document.querySelector("#current-feels-like").innerHTML = Math.round(
-        response.data.main.feels_like
-      );
-      document.querySelector("#current-clouds-api").innerHTML =
-        response.data.clouds.all;
-      document.querySelector("#current-wind-api").innerHTML = Math.round(
-        response.data.wind.speed
-      );
-      document
-        .querySelector("#current-weather")
-        .setAttribute(
-          "src",
-          `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-        );
-      document
-        .querySelector("#current-weather")
-        .setAttribute("alt", response.data.weather[0].description);
-    });
+  axios.get(`${root}q=london&units=${units}&appid=${apiKey}`).then(returnData);
 }
-
 selectDefault();
+
+// Return API data for current weather
+function returnData(response) {
+  document.querySelector("#current-temp").innerHTML = Math.round(
+    response.data.main.temp
+  );
+  document.querySelector("#current-feels-like").innerHTML = Math.round(
+    response.data.main.feels_like
+  );
+  document.querySelector("#current-clouds-api").innerHTML =
+    response.data.clouds.all;
+  document.querySelector("#current-wind-api").innerHTML = Math.round(
+    response.data.wind.speed
+  );
+  document
+    .querySelector("#current-weather")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+  document
+    .querySelector("#current-weather")
+    .setAttribute("alt", response.data.weather[0].description);
+}
 
 // Search City via API - (as a result of clicking 🔍 button)
 let citySearch = document.querySelector("#search-bar");
@@ -99,30 +99,7 @@ function selectCity(event) {
 // Pull current weather condition data via API - (following successful city lookup)
 function pullTemp() {
   let city = citySearchInput.value;
-  axios
-    .get(`${root}q=${city}&units=${units}&appid=${apiKey}`)
-    .then((response) => {
-      document.querySelector("#current-temp").innerHTML = Math.round(
-        response.data.main.temp
-      );
-      document.querySelector("#current-feels-like").innerHTML = Math.round(
-        response.data.main.feels_like
-      );
-      document.querySelector("#current-clouds-api").innerHTML =
-        response.data.clouds.all;
-      document.querySelector("#current-wind-api").innerHTML = Math.round(
-        response.data.wind.speed
-      );
-      document
-        .querySelector("#current-weather")
-        .setAttribute(
-          "src",
-          `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-        );
-      document
-        .querySelector("#current-weather")
-        .setAttribute("alt", response.data.weather[0].description);
-    });
+  axios.get(`${root}q=${city}&units=${units}&appid=${apiKey}`).then(returnData);
 }
 
 citySearch.addEventListener("submit", selectCity);
@@ -137,28 +114,9 @@ currentLocation.addEventListener("click", () => {
       .get(`${root}lat=${lat}&lon=${long}&units=${units}&appid=${apiKey}`)
       // update current weather conditions in line with current location
       .then((response) => {
-        document.querySelector("#current-temp").innerHTML = Math.round(
-          response.data.main.temp
-        );
-        document.querySelector("#current-feels-like").innerHTML = Math.round(
-          response.data.main.feels_like
-        );
-        document.querySelector("#current-clouds-api").innerHTML =
-          response.data.clouds.all;
-        document.querySelector("#current-wind-api").innerHTML = Math.round(
-          response.data.wind.speed
-        );
+        returnData(response);
         document.querySelector("h1").innerHTML = response.data.name;
-        citySearchInput.value = response.data.name;
-        document
-          .querySelector("#current-weather")
-          .setAttribute(
-            "src",
-            `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-          );
-        document
-          .querySelector("#current-weather")
-          .setAttribute("alt", response.data.weather[0].description);
+        citySearchInput.value = "";
       });
   });
 });

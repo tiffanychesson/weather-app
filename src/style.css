@@ -1,0 +1,85 @@
+h1,
+h2 {
+  text-align: center;
+}
+h1 {
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  margin-top: 10px;
+}
+h2 {
+  font-size: 0.95rem;
+  color: rgb(182, 180, 180);
+}
+P {
+  text-align: center;
+  margin-bottom: 0px;
+}
+.container {
+  width: 60%;
+}
+.weather-colour {
+  background: white;
+  border-radius: 0px 0px 170px 170px;
+  box-shadow: 0px 0px 185px 100px #fdbc10;
+}
+.search-bar {
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+}
+.search-field {
+  display: inline-block;
+  width: 80%;
+  margin: 1% 0% 0% 3%;
+}
+.current-clouds {
+  text-align: right;
+}
+.current-weather {
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+}
+.current-wind {
+  text-align: left;
+}
+.weather-icon {
+  color: grey;
+  font-size: 1.95rem;
+  display: inline-block;
+}
+.current-temperature {
+  text-align: center;
+  font-size: 1.15rem;
+}
+.current-feels-like {
+  text-align: center;
+  font-size: 0.95rem;
+  margin-bottom: 5px;
+}
+.weather-emoji {
+  font-size: 1.75rem;
+  margin-bottom: 0%;
+}
+.forecast-temp {
+  font-size: 0.85rem;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+.icons {
+  top: 65px;
+  position: relative;
+  font-size: 0.8rem;
+}
+.card-label {
+  font-size: 0.85rem;
+}
+.card-body {
+  padding: 5%;
+  margin: 3%;
+}
+.row {
+  --bs-gutter-x: 0.5rem;
+  --bs-gutter-y: 0;
+}

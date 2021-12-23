@@ -22,9 +22,10 @@
   <body>
     <div class="container">
       <div class="weather-colour">
-        <div class="row">
           <div class="col-12">
             <form id="search-bar">
+              <div class="row search-bar">
+                <div class="col">
               <input
                 autocomplete="off"
                 autofocus="on"
@@ -33,8 +34,11 @@
                 class="form-control search-field"
                 id="search-bar-input"
               />
+              </div>
+              <div class="col-md-auto">
               <input class="btn btn-light submit" type="submit" value="🔍">
               <input class="btn btn-light" id="current-location" type="button" value="📍">
+              </div>
             </form>
           </div>
         </div>

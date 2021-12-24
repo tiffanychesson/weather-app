@@ -90,6 +90,10 @@ function returnData(response) {
   celsiusTemperature = response.data.main.temp;
 
   getForecast(response.data.coord);
+
+  console.log(response);
+
+  getCurrentWeatherColour(response.data.weather[0].main);
 }
 
 // Search City via API - (as a result of clicking 🔍 button)
@@ -189,8 +193,6 @@ function displayForecast(response) {
     }
   });
   forecastElement.innerHTML = forecastHTML;
-
-  console.log(response);
 }
 
 // Get Forecast
@@ -217,4 +219,27 @@ function formatForecastDay(timestamp) {
     "Saturday",
   ];
   return days[day];
+}
+
+// Change background shadow colour dependent on current weather
+let weatherColour = document.querySelector("#weather-colour");
+
+function getCurrentWeatherColour(response) {
+  if (response === "Clear") {
+    weatherColour.classList.add("weather-colour-clear");
+    weatherColour.classList.remove("weather-colour-default");
+    weatherColour.classList.remove("weather-colour-rain");
+  } else if (
+    response === "Rain" ||
+    response === "Drizzle" ||
+    response === "Snow"
+  ) {
+    weatherColour.classList.add("weather-colour-rain");
+    weatherColour.classList.remove("weather-colour-default");
+    weatherColour.classList.remove("weather-colour-clear");
+  } else {
+    weatherColour.classList.add("weather-colour-default");
+    weatherColour.classList.remove("weather-colour-rain");
+    weatherColour.classList.remove("weather-colour-clear");
+  }
 }

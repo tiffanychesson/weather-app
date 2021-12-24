@@ -26,7 +26,21 @@ P {
 .weather-colour {
   background: white;
   border-radius: 0px 0px 170px 170px;
-  box-shadow: 0px 0px 185px 100px #ffd561;
+}
+.weather-colour-default {
+  background: white;
+  border-radius: 0px 0px 170px 170px;
+  box-shadow: 0px 0px 185px 100px #c2c2c1;
+}
+.weather-colour-rain {
+  background: white;
+  border-radius: 0px 0px 170px 170px;
+  box-shadow: 0px 0px 185px 100px #a1ebfd;
+}
+.weather-colour-clear {
+  background: white;
+  border-radius: 0px 0px 170px 170px;
+  box-shadow: 0px 0px 185px 100px #ffe77d;
 }
 .current-weather {
   display: inline-block;

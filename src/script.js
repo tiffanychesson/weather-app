@@ -231,9 +231,7 @@ function displayCelsiusTemperature(event) {
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
   units = "metric";
-  axios
-    .get(`${root}weather?q=london&units=${units}&appid=${apiKey}`)
-    .then(pullTemp);
+  pullTemp();
 }
 
 function displayFahrenheitTemperature(event) {
@@ -241,7 +239,5 @@ function displayFahrenheitTemperature(event) {
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
   units = "imperial";
-  axios
-    .get(`${root}weather?q=london&units=${units}&appid=${apiKey}`)
-    .then(pullTemp);
+  pullTemp();
 }

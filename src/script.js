@@ -148,3 +148,31 @@ function displayFahrenheitTemperature(event) {
     (celsiusTemperature * 9) / 5 + 32
   );
 }
+
+// Display forecast
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+
+  let days = ["Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+            <div class="card">
+              <div class="card-body">
+                <div class="forecast-1">
+                  <div class="forecast-weather"><img id="forecast-weather" src="https://openweathermap.org/img/wn/10d.png" alt="Clear" /></div>
+                  <div class="forecast-temp">4•c / <span class="forecast-temp-max"> 10•c</span></div>
+                </div>
+              </div>
+            </div>
+            <p class="card-label">${day}</p>
+          </div>`;
+  });
+  forecastElement.innerHTML = forecastHTML;
+}
+
+displayForecast();

@@ -158,29 +158,39 @@ function displayFahrenheitTemperature(event) {
 }
 
 // Display forecast
-
-function displayForecast() {
+function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
+
+  let forecast = response.data.daily;
 
   let forecastHTML = `<div class="row">`;
 
-  let days = ["Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
             <div class="card">
               <div class="card-body">
                 <div class="forecast-1">
-                  <div class="forecast-weather"><img id="forecast-weather" src="https://openweathermap.org/img/wn/10d.png" alt="Clear" /></div>
-                  <div class="forecast-temp">4•c / <span class="forecast-temp-max"> 10•c</span></div>
+                  <div class="forecast-weather"><img id="forecast-weather" src="https://openweathermap.org/img/wn/${
+                    forecastDay.weather[0].icon
+                  }.png" alt="Clear" /></div>
+                  <div class="forecast-temp"><span id="forecast-temp-min">${Math.round(
+                    forecastDay.temp.min
+                  )}</span>°C / <span class="forecast-temp-max"> ${Math.round(
+          forecastDay.temp.max
+        )}</span>°C</div>
                 </div>
               </div>
             </div>
-            <p class="card-label">${day}</p>
+            <p class="card-label">${formatForecastDay(forecastDay.dt)}</p>
           </div>`;
+    }
   });
   forecastElement.innerHTML = forecastHTML;
+
+  console.log(response);
 }
 
 // Get Forecast
@@ -190,4 +200,21 @@ function getForecast(coordinates) {
   axios
     .get(`${root}onecall?lat=${lat}&lon=${long}&units=${units}&appid=${apiKey}`)
     .then(displayForecast);
+}
+
+// Format day of week for forecast
+function formatForecastDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  return days[day];
 }

@@ -66,6 +66,8 @@ selectDefault();
 
 // Return API data for current weather - (following successful city lookup)
 function returnData(response) {
+  getCurrentWeatherColour(response.data.weather[0].main);
+
   document.querySelector("#current-temp").innerHTML = Math.round(
     response.data.main.temp
   );
@@ -92,11 +94,7 @@ function returnData(response) {
     document.querySelector("#current-wind-imperial").innerHTML = "m/s";
   }
 
-  celsiusTemperature = response.data.main.temp;
-
   getForecast(response.data.coord);
-
-  getCurrentWeatherColour(response.data.weather[0].main);
 }
 
 // Search City via API - (as a result of clicking 🔍 button)
@@ -109,6 +107,8 @@ function selectCity(event) {
   pullTemp();
 }
 
+citySearch.addEventListener("submit", selectCity);
+
 // Pull current weather condition data via API - (following successful city lookup)
 function pullTemp() {
   let city = citySearchInput.value;
@@ -116,8 +116,6 @@ function pullTemp() {
     .get(`${root}weather?q=${city}&units=${units}&appid=${apiKey}`)
     .then(returnData);
 }
-
-citySearch.addEventListener("submit", selectCity);
 
 // Get current location - (as a result of clicking 📍 button)
 let currentLocation = document.querySelector("#current-location");
@@ -137,35 +135,6 @@ currentLocation.addEventListener("click", () => {
       });
   });
 });
-
-// Convert Temperatures using C and F "links"
-let celsiusTemperature = null;
-
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
-
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", displayCelsiusTemperature);
-
-function displayCelsiusTemperature(event) {
-  event.preventDefault();
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
-  units = "metric";
-  axios
-    .get(`${root}weather?q=london&units=${units}&appid=${apiKey}`)
-    .then(returnData);
-}
-
-function displayFahrenheitTemperature(event) {
-  event.preventDefault();
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-  units = "imperial";
-  axios
-    .get(`${root}weather?q=london&units=${units}&appid=${apiKey}`)
-    .then(returnData);
-}
 
 // Display forecast
 function displayForecast(response) {
@@ -248,4 +217,31 @@ function getCurrentWeatherColour(response) {
     weatherColour.classList.remove("weather-colour-rain");
     weatherColour.classList.remove("weather-colour-clear");
   }
+}
+
+// Convert Temperatures using C and F "links"
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  units = "metric";
+  axios
+    .get(`${root}weather?q=london&units=${units}&appid=${apiKey}`)
+    .then(pullTemp);
+}
+
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  units = "imperial";
+  axios
+    .get(`${root}weather?q=london&units=${units}&appid=${apiKey}`)
+    .then(pullTemp);
 }

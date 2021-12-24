@@ -57,7 +57,7 @@ let units = "metric";
 
 // Default to London - (on page load)
 function selectDefault() {
-  document.querySelector("h1").innerHTML = `London`;
+  document.querySelector("h1").innerHTML = `${city}`;
   axios
     .get(`${root}weather?q=${city}&units=${units}&appid=${apiKey}`)
     .then(returnData);
@@ -68,6 +68,7 @@ selectDefault();
 
 // Return API data for current weather - (following successful city lookup)
 function returnData(response) {
+  document.querySelector("h1").innerHTML = `${city}`;
   city = response.data.name;
 
   getCurrentWeatherColour(response.data.weather[0].main);
@@ -107,7 +108,6 @@ let citySearchInput = document.querySelector("#search-bar-input");
 
 function selectCity(event) {
   event.preventDefault();
-  document.querySelector("h1").innerHTML = `${citySearchInput.value}`;
   pullTemp();
 }
 

@@ -88,6 +88,8 @@ function returnData(response) {
     .setAttribute("alt", response.data.weather[0].description);
   if (units === "imperial") {
     document.querySelector("#current-wind-imperial").innerHTML = "mph";
+  } else if (units === "metric") {
+    document.querySelector("#current-wind-imperial").innerHTML = "m/s";
   }
 
   celsiusTemperature = response.data.main.temp;

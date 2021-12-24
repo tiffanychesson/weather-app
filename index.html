@@ -49,24 +49,25 @@
             </div>
         </div>
         <div class="row current-temperature">
-          <div class="col-4 current-clouds icons float-right">
+          <div class="col-4 current-clouds icons float-end">
               <i class="fas fa-cloud weather-icon"></i>
               <br />
               <span id="current-clouds-api"> </span>%
             </div>
-          <div class="col-4">
-            <div class="clearfix">
-            <span id="current-temp" class="current-temp"> </span>
-            <span class="current-temp-unit">°C</span></div>
-        <div class="current-feels-like">feels like <span id="current-feels-like"> </span>°C</div>
+          <div class="col-2">
+            <span id="current-temp" class="current-temp float-end"> </span>
+            </div>
+            <div class="col-2 temp-unit">
+            <a href="#" id="celsius-link" class="current-temp-unit active">°C</a>
+            <a href="#" id="fahrenheit-link" class="current-temp-unit">°F</a>
             </div>
             <div class="col-4 current-wind icons float-left">
               <i class="fas fa-wind weather-icon"></i>
               <br />
               <span id="current-wind-api"></span>mph
-            
           </div>
         </div>
+        <div class="current-feels-like">feels like <span id="current-feels-like"> </span>°C</div>
         <div class="row">
           <div class="col-2">
             <div class="card">

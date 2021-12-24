@@ -84,6 +84,8 @@ function returnData(response) {
   document
     .querySelector("#current-weather")
     .setAttribute("alt", response.data.weather[0].description);
+
+  celsiusTemperature = response.data.main.temp;
 }
 
 // Search City via API - (as a result of clicking 🔍 button)
@@ -120,3 +122,29 @@ currentLocation.addEventListener("click", () => {
       });
   });
 });
+
+// Convert Temperatures
+let celsiusTemperature = null;
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  document.querySelector("#current-temp").innerHTML =
+    Math.round(celsiusTemperature);
+}
+
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  document.querySelector("#current-temp").innerHTML = Math.round(
+    (celsiusTemperature * 9) / 5 + 32
+  );
+}

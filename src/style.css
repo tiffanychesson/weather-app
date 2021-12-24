@@ -45,19 +45,13 @@ P {
   font-size: 1.95rem;
   display: inline-block;
 }
-.clearfix {
-  text-align: center;
-}
 .current-temp {
-  text-align: center;
+  text-align: right;
   font-size: 50px;
   margin-bottom: 5px;
-  display: inline-block;
   line-height: 1;
-}
-.current-temp-unit {
   position: relative;
-  top: -24px;
+  right: -10px;
 }
 .current-feels-like {
   text-align: center;
@@ -65,6 +59,14 @@ P {
   margin-bottom: 20px;
   margin-top: 0px;
   color: rgb(117, 116, 116);
+}
+.temp-unit {
+  margin-top: 5px;
+}
+.current-temp-unit {
+  line-height: 1.2;
+  display: block;
+  text-decoration: none;
 }
 .weather-emoji {
   font-size: 1.75rem;
@@ -95,4 +97,12 @@ P {
   margin-top: 60px;
   text-align: right;
   color: lightslategray;
+}
+.active {
+  color: rgb(33, 33, 33);
+  cursor: default;
+}
+.active:hover {
+  text-decoration: none;
+  color: rgb(33, 33, 33);
 }

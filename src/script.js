@@ -51,14 +51,16 @@ function formatDate(now) {
 currentDate.innerHTML = formatDate(now);
 
 // API link foundations
-let root = "https://api.openweathermap.org/data/2.5/weather?";
+let root = "https://api.openweathermap.org/data/2.5/";
 let apiKey = "b1ed8cbb71d26e708aef7f929929627c";
 let units = "metric";
 
 // Default to London - (on page load)
 function selectDefault() {
   document.querySelector("h1").innerHTML = `London`;
-  axios.get(`${root}q=london&units=${units}&appid=${apiKey}`).then(returnData);
+  axios
+    .get(`${root}weather?q=london&units=${units}&appid=${apiKey}`)
+    .then(returnData);
 }
 selectDefault();
 
@@ -86,6 +88,8 @@ function returnData(response) {
     .setAttribute("alt", response.data.weather[0].description);
 
   celsiusTemperature = response.data.main.temp;
+
+  getForecast(response.data.coord);
 }
 
 // Search City via API - (as a result of clicking 🔍 button)
@@ -101,7 +105,9 @@ function selectCity(event) {
 // Pull current weather condition data via API - (following successful city lookup)
 function pullTemp() {
   let city = citySearchInput.value;
-  axios.get(`${root}q=${city}&units=${units}&appid=${apiKey}`).then(returnData);
+  axios
+    .get(`${root}weather?q=${city}&units=${units}&appid=${apiKey}`)
+    .then(returnData);
 }
 
 citySearch.addEventListener("submit", selectCity);
@@ -113,7 +119,9 @@ currentLocation.addEventListener("click", () => {
     let lat = position.coords.latitude;
     let long = position.coords.longitude;
     axios
-      .get(`${root}lat=${lat}&lon=${long}&units=${units}&appid=${apiKey}`)
+      .get(
+        `${root}weather?lat=${lat}&lon=${long}&units=${units}&appid=${apiKey}`
+      )
       // update current weather conditions in line with current location
       .then((response) => {
         returnData(response);
@@ -175,4 +183,11 @@ function displayForecast() {
   forecastElement.innerHTML = forecastHTML;
 }
 
-displayForecast();
+// Get Forecast
+function getForecast(coordinates) {
+  let lat = coordinates.lat;
+  let long = coordinates.lon;
+  axios
+    .get(`${root}onecall?lat=${lat}&lon=${long}&units=${units}&appid=${apiKey}`)
+    .then(displayForecast);
+}

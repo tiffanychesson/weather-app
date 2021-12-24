@@ -62,7 +62,7 @@ function selectDefault() {
 }
 selectDefault();
 
-// Return API data for current weather
+// Return API data for current weather - (following successful city lookup)
 function returnData(response) {
   document.querySelector("#current-temp").innerHTML = Math.round(
     response.data.main.temp
@@ -123,7 +123,7 @@ currentLocation.addEventListener("click", () => {
   });
 });
 
-// Convert Temperatures
+// Convert Temperatures using C and F "links"
 let celsiusTemperature = null;
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");

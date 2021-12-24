@@ -68,14 +68,19 @@ P {
   display: block;
   text-decoration: none;
 }
-.weather-emoji {
-  font-size: 1.75rem;
-  margin-bottom: 0%;
+.forecast-weather {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
 }
 .forecast-temp {
   font-size: 0.85rem;
   padding-bottom: 0px;
   margin-bottom: 0px;
+  text-align: center;
+}
+.forecast-temp-max {
+  font-weight: bold;
 }
 .icons {
   position: relative;

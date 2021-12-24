@@ -86,12 +86,13 @@ function returnData(response) {
   document
     .querySelector("#current-weather")
     .setAttribute("alt", response.data.weather[0].description);
+  if (units === "imperial") {
+    document.querySelector("#current-wind-imperial").innerHTML = "mph";
+  }
 
   celsiusTemperature = response.data.main.temp;
 
   getForecast(response.data.coord);
-
-  console.log(response);
 
   getCurrentWeatherColour(response.data.weather[0].main);
 }
@@ -148,17 +149,20 @@ function displayCelsiusTemperature(event) {
   event.preventDefault();
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
-  document.querySelector("#current-temp").innerHTML =
-    Math.round(celsiusTemperature);
+  units = "metric";
+  axios
+    .get(`${root}weather?q=london&units=${units}&appid=${apiKey}`)
+    .then(returnData);
 }
 
 function displayFahrenheitTemperature(event) {
   event.preventDefault();
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
-  document.querySelector("#current-temp").innerHTML = Math.round(
-    (celsiusTemperature * 9) / 5 + 32
-  );
+  units = "imperial";
+  axios
+    .get(`${root}weather?q=london&units=${units}&appid=${apiKey}`)
+    .then(returnData);
 }
 
 // Display forecast

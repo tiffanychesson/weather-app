@@ -154,7 +154,7 @@ function displayForecast(response) {
     if (index < 6) {
       forecastHTML =
         forecastHTML +
-        `<div class="col-2">
+        `<div class="col-sm-2">
             <div class="card">
               <div class="card-body">
                 <div class="forecast-1">

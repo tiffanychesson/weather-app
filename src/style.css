@@ -125,3 +125,8 @@ P {
   text-decoration: none;
   color: rgb(33, 33, 33);
 }
+@media (max-width: 576px) {
+  .current-temp {
+    font-size: 40px;
+  }
+}

@@ -129,4 +129,7 @@ P {
   .current-temp {
     font-size: 40px;
   }
+  .container{
+    width: 100%;
+  }
 }
